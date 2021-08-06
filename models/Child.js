@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Meal extends Model {}
+class Child extends Model {}
 
-Meal.init({
+Child.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,24 +14,8 @@ Meal.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    has_nuts: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
 
-    },
-    has_meat: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
 
-    },
-    has_gluten: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-
-    },
-    description: {
-        type: DataTypes.STRING,
-    },
     user_id: {
         type: DataTypes.INTEGER,
         references: {
@@ -44,7 +28,7 @@ Meal.init({
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'meal',
+    modelName: 'child',
 });
 
-module.exports = Meal;
+module.exports = Child;
