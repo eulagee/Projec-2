@@ -1,28 +1,35 @@
 const router = require('express').Router();
-const Meal = require('../models/Meal');
+const { User } = require('../models');
+const withAuth = require('../utils/auth');
 
-// route to get all dishes
-router.get('/', async (req, res) => {
-  const mealData = await Meal.findAll().catch((err) => {
-    res.json(err);
-  });
-  const meals = mealData.map((meal) => meal.get({ plain: true }));
-  res.render('all', { meals });
-});
-
-// route to get one dish
-router.get('/meal/:id', async (req, res) => {
+// Prevent non logged in users from viewing the homepage
+router.get('/', withAuth, async (req, res) => {
   try {
-    const mealData = await Meal.findByPk(req.params.id);
-    if (!mealData) {
-      res.status(404).json({ message: 'No dish with this id!' });
-      return;
-    }
-    const meal = mealData.get({ plain: true });
-    res.render('meal', meal);
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      order: [['name', 'ASC']],
+    });
+
+    const users = userData.map((project) => project.get({ plain: true }));
+
+    res.render('homepage', {
+      users,
+      // Pass the logged in flag to the template
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.get('/login', (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
 });
 
 module.exports = router;
