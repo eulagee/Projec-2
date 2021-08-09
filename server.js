@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 // const sess = {
 //   secret: 'Super secret secret',
 //   cookie: {},
-//   resave: false,
+//   resave: flse,
 //   saveUninitialized: true,
 //   store: new SequelizeStore({
 //     db: sequelize

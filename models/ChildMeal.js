@@ -10,8 +10,6 @@ ChildMeal.init({
         primaryKey: true,
         autoIncrement: true,
     },
-
-
 }, {
     sequelize,
     timestamps: false,
