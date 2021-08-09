@@ -474,7 +474,8 @@ html*#latest .news-bg {
     margin: 0 0 5px 13px;
 }
 
-#galleries ul.gallery li a img {}
+
+/*#galleries ul.gallery li a img {}*/
 
 #galleries ul.advert {
     list-style: none;
