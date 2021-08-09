@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/css/style.css" rel="stylesheet" type="text/css">
-<link href="/css/style2.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+{{!-- <link href="/css/style.css" rel="stylesheet" type="text/css"> --}}
+{{!-- <link href="/css/style2.css" rel="stylesheet" type="text/css"> --}}
   <title>OurMeals</title>
 <!--[if lte IE 6]>
 	<script type="text/javascript" src="supersleight-min.js"></script>
@@ -15,11 +16,33 @@
 
 <body>
   <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        &#127881 Potluck Party! &#127881
-      </h1>
-    </header>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Our Meals</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/choice">Choices</a>
+      </li>
+      <li class="nav-item"> 
+        <a class="nav-link" href="/type">Type</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
       <main class="container container-fluid mt-5">
       <!-- Add a comment describing what the following line of code is doing. -->
       <!-- The following line is a place holder for where the main content will be rendered. -->
