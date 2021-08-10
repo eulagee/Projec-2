@@ -1,98 +1,42 @@
 const router = require('express').Router();
-const { Meal, User } = require('../../models');
-const withAuth = require('../../utils/auth');
+const Meal = require('../../models/Meal');
 
-// GET all meals for homepage
-// GET /api/meal
-
-router.get('/', async(req, res) => {
-    try {
-        const mealData = await Meal.findAll({
-            include: [{
-                model: User,
-                attributes: ['name'],
-            }, ],
-        });
-
-        const meals = mealData.map((meal) => meal.get({ plain: true }));
-
-        res.render('homepage', {
-            meals,
-            logged_in: req.session.logged_in,
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
+// route to create/add a dish
+router.post('/', async (req, res) => {
+  try {
+    const mealData = await Meal.create({
+      meal_name: req.body.meal_name,
+      description: req.body.description,
+    });
+    res.status(200).json(mealData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
-router.get('/test', async(req, res) => {
-    try {
-        const mealData = await Meal.findAll({
-            include: [{
-                model: User,
-                attributes: ['name'],
-            }, ],
-        });
-
-        const meals = mealData.map((meal) => meal.get({ plain: true }));
-
-        res.json(meals);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// GET /api/meal/:id
-router.get('/meal/:id', async(req, res) => {
-    try {
-        const mealData = await Meal.findByPk(req.params.id, {
-            include: [{
-                model: User,
-                attributes: ['name', 'description'],
-            }, ],
-        });
-
-        const meal = mealData.get({ plain: true });
-
-        res.render('project', {
-            ...meal,
-            logged_in: req.session.logged_in,
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// Use withAuth middleware to prevent access to route
-//// GET /api/meal/meal
-router.get('/meal', withAuth, async(req, res) => {
-    try {
-        // Find the logged in user based on the session ID
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] },
-            include: [{ model: Project }],
-        });
-
-        const user = userData.get({ plain: true });
-
-        res.render('profile', {
-            ...user,
-            logged_in: true,
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// GET /api/meal/login
-router.get('/login', (req, res) => {
-    // If the user is already logged in, redirect the request to another route
-    if (req.session.logged_in) {
-        res.redirect('/meal');
-        return;
-    }
-
-    res.render('login');
+// According to MVC, what is the role of this action method?
+// This action method is the Controller. It accepts input and sends data to the Model and the View.
+router.put('/:id', async (req, res) => {
+  // Where is this action method sending the data from the body of the fetch request? Why?
+  // It is sending the data to the Model so that one dish can be updated with new data in the database.
+  try {
+    const meal = await Meal.update(
+      {
+        meal_name: req.body.meal_name,
+        description: req.body.description,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    // If the database is updated successfully, what happens to the updated data below?
+    // The updated data (dish) is then sent back to handler that dispatched the fetch request.
+    res.status(200).json(meal);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
