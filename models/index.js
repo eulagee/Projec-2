@@ -1,24 +1,29 @@
 const User = require('./User');
 const Meal = require('./Meal');
-
+const Menu = require('./Menu');
 
 // each user has many (multiple) meals
-User.hasMany(Meal, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+Menu.hasMany(Meal, {
+  foreignKey: 'menu_id',
 });
 
-//each meal belongs to a user 
-Meal.belongsTo(User, {
-    foreignKey: 'user_id'
+//each meal belongs to a user
+Meal.belongsTo(Menu, {
+  foreignKey: 'menu_id',
 });
+
+// Category.hasMany(Meal, {
+//   foreignKey: 'category_id',
+// });
+
+// Meal.belongsTo(Category, {
+//   foreignKey: 'category_id',
+// });
 
 // Meal.belongsToMany(User, {
 //     foreignKey: 'id',
 //     unique: false
 // });
-
-
 
 // User.belongsToMany(Meal, {
 //     through: {
@@ -27,5 +32,4 @@ Meal.belongsTo(User, {
 //     }
 // })
 
-
-module.exports = { User, Meal };
+module.exports = { User, Meal, Menu };

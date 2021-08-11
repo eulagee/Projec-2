@@ -1,59 +1,102 @@
-<!-- Add a comment indicating how this file fits into the MVC framework (is it a Model, a View, or a Controller?) and what it is responsible for handling. -->
-<!-- This file is part of the View. It handles UI/UX concerns (layout and display)-->
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-{{!-- <link href="/css/style.css" rel="stylesheet" type="text/css"> --}}
-{{!-- <link href="/css/style2.css" rel="stylesheet" type="text/css"> --}}
-  <title>OurMeals</title>
-<!--[if lte IE 6]>
-	<script type="text/javascript" src="supersleight-min.js"></script>
-    <link href="css/ie6.css" rel="stylesheet" type="text/css" />
-<![endif]-->
-</head>
+<html lang='en'>
 
-<body>
-  <div class="flex-column justify-space-around">
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Our Meals</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>OUR MEAL</title>
+    <link
+      rel='shortcut icon'
+      href='../images/fav_icon.png'
+      type='image/x-icon'
+    />
+    <link
+      rel='stylesheet'
+      href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+    />
+    <link
+      href='https://fonts.googleapis.com/css?family=Open+Sans'
+      rel='stylesheet'
+    />
+    <!-- Bulma Version 0.9.0-->
+    <link
+      rel='stylesheet'
+      href='https://unpkg.com/bulma@0.9.0/css/bulma.min.css'
+    />
+    <style type='text/css'>
+      html, body { font-family: 'Open Sans'; } img { padding: 5px; border: 1px
+      solid #ccc; }
+    </style>
+  </head>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/choice">Choices</a>
-      </li>
-      <li class="nav-item"> 
-        <a class="nav-link" href="/type">Type</a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link" href="/contact">Contact</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-      <main class="container container-fluid mt-5">
-      <!-- Add a comment describing what the following line of code is doing. -->
-      <!-- The following line is a place holder for where the main content will be rendered. -->
-      <!-- What should we expect to see when visiting http://localhost:3001/ in the browser? -->
-      <!-- We would expect to see the contents of all.handlebars in the browser, 
-			because that is what we are instructing it to render in dish-routes.js. -->
-     {{{ body }}}
-      </main>
-  </div>
+  <body>
+    <section class='hero is-fullheight is-default is-bold'>
+      <div class='hero-head'>
+        <nav class='navbar'>
+          <div class='container'>
+            <div class='navbar-brand'>
+              <a class='navbar-item' href='../'>
+                <img
+                  src='/public/assets/Screen Shot 2021-08-10 at 4.01.08 PM.png'
+                  alt='Logo'
+                />
+              </a>
+              <span class='navbar-burger burger' data-target='navbarMenu'>
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id='navbarMenu' class='navbar-menu'>
+              <div class='navbar-end'>
+                <div class='tabs is-right'>
+                  <ul>
+                    <a href='/'>Home</a>
+                    {{#if loggedIn}}
+                      <button id='logout' class='btn-no-style'>Logout</button>
+                    {{else}}
+                      <a href='/login'>Login</a>
+                    {{/if}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class='hero-body'>
+        <div class='container has-text-centered'>
+          <div class='columns is-vcentered'>
+            <div class='column is-5'>
+              <figure class='image is-4by3'>
+                <img
+                  src='https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8&w=1000&q=80'
+                  alt='Description'
+                />
+              </figure>
+            </div>
+            <div class='column is-6 is-offset-1'>
+              <h1 class='title is-2'>
+                OUR MEALS
+              </h1>
+              <h2 class='subtitle is-4'>
+                Good food shouldn't be just doctor recommended.
+              </h2>
+              {{{body}}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='hero-foot'>
+        <div class='container'>
+          <div class='tabs is-centered'>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
   </body>
 
 </html>
-
-
